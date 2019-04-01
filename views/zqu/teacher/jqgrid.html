@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>广东海洋大学学生请假管理系统教师端</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="shortcut icon" href="../../../static/images/favicon.ico">
+		<link href="../../../static/css/teacher/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../static/css/teacher/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../../static/js/teacher/bootstrap_above/bootstrap-table-develop/dist/bootstrap-table.css" />
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		<link rel="stylesheet" href="../../../static/css/teacher/ace.min.css" />
+		<link rel="stylesheet" href="../../../static/css/teacher/ace-rtl.min.css" />
+		<link rel="stylesheet" href="../../../static/css/teacher/ace-skins.min.css" />
+		
+		<style>
+			.pagination-detail{
+			display:none;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+	<div class="image-container set-full-height"
+     style="background-image: url('/YibanLeaveSystem/YibanLeaveSystem/static/images/bg.png')">
+    <section>
+	<div class="container">
+	                  
+					<div class="row" style="height:80px" > <!-- //导航栏 --> 
+					<ul  class="nav nav-pills" >
+					 <li role="presentation" class="active" ><a href="#">aaa</a></li> 
+					  <li role="presentation" ><a href="http://localhost:8080/YibanLeaveSystem/YibanLeaveSystem/views/zqu/student/record.html#">bbb</a></li> 
+					<!--  <li role="presentation" ><a href="javascript:viewRecord()">请假记录</a></li>  -->
+					 <li style="float:right" role="presentation"  ><a href="http://localhost:8080/YibanLeaveSystem/YibanLeaveSystem/views/zqu/login.html">退出</a></li> 
+					 <li style="float:right"> 欢迎您使用学生请假管理系统(教师端) &nbsp;</li>
+					
+					</ul>
+					</div>
+												<!-- 		<div class="navbar navbar-default" id="navbar">
+														
+															<script type="text/javascript">
+																try { ace.settings.check('navbar', 'fixed') } catch(e) {}
+															</script>
+												
+															<div class="navbar-container" id="navbar-container">
+																<div class="navbar-header pull-left">
+																	<a href="#" class="navbar-brand">
+																		<small>
+																			<i class="icon-leaf"></i>
+																			广东海洋大学学生请假管理系统
+																		</small>
+																	</a>
+																</div>
+												
+															</div>
+														</div> -->
+
+		<div class="main-container" id="main-container">
+		
+							<script type="text/javascript">
+								try { ace.settings.check('main-container', 'fixed') } catch(e) {}
+							</script>
+
+			<div class="main-container-inner">
+			
+											<!--<a class="menu-toggler" id="menu-toggler" href="#">-->
+												<!--<span class="menu-text"></span>-->
+											<!--</a>-->
+											
+															<!--<div class="sidebar" id="sidebar">-->
+																<!--<script type="text/javascript">-->
+																	<!--try { ace.settings.check('sidebar', 'fixed') } catch(e) {}-->
+																<!--</script>-->
+											
+																<!--<div class="sidebar-shortcuts" id="sidebar-shortcuts">-->
+											
+																	<!--<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">-->
+																		<!--<span class="btn btn-success"></span>-->
+											
+																		<!--<span class="btn btn-info"></span>-->
+											
+																		<!--<span class="btn btn-warning"></span>-->
+											
+																		<!--<span class="btn btn-danger"></span>-->
+																	<!--</div>-->
+																<!--</div>-->
+
+																	<!--&lt;!&ndash;<ul class="nav nav-list">&ndash;&gt;-->
+																		<!--&lt;!&ndash;<li>&ndash;&gt;-->
+																			<!--&lt;!&ndash;<a href="jqgrid.html">&ndash;&gt;-->
+																				<!--&lt;!&ndash;<i class="icon-home"></i>&ndash;&gt;-->
+																				<!--&lt;!&ndash;<span class="menu-text">请假情况</span>&ndash;&gt;-->
+																			<!--&lt;!&ndash;</a>&ndash;&gt;-->
+																		<!--&lt;!&ndash;</li>&ndash;&gt;-->
+												
+																	<!--&lt;!&ndash;</ul>&ndash;&gt;-->
+												
+																	<!--<div class="sidebar-collapse" id="sidebar-collapse">-->
+																		<!--<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>-->
+																	<!--</div>-->
+												
+																<!--</div>-->
+
+				<div class="content">
+				
+								<div class="breadcrumbs" id="breadcrumbs">
+									<div class="nav-search" id="nav-search">
+									
+																		<!--	<form class="form-search">
+																				<span class="input-icon">
+																					<input type="text" placeholder="请输入关键字" class="nav-search-input" id="nav-search-input" autocomplete="off" />
+																					<button id="search_btn" title="搜索"><i class="icon-search nav-search-icon"></i></button>
+																				</span>
+																			</form>-->										
+									</div>
+							    </div>
+
+								<div class="page-content">
+									<div class="row">
+										  <div class="col-xs-12 col-md-12 col-lg-12 ">
+											    <div class="" style="margin: 20px;">
+												<a  id="printExcel" class="btn btn-sm btn-success icon-print icon-blue">导出Excel</a>
+											    </div>
+												<!--此行不可删-->
+												<span id="dataBox" style="display:none" >${yiban_id}</span>
+											<table class="table-responsive" id="teacherTable"></table>
+										  </div>
+									</div>
+								</div>
+								
+				</div>
+
+                
+
+
+				<!--   	模态框                  -->
+				<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="ture">
+					<div class="modal-dialog">
+						<div class="modal-content">
+						
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">修改信息</h4>
+									</div>
+							
+							<form class="form-horizontal">
+							
+								<div class="modal-body">
+								
+								<input type="text" id="Iid" name="Iid" style="display:none"/>
+								
+									<div class="form-group row">
+									
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-bookmark"></i>学号</span>
+												<input type="text" class="form-control" name="studentId"  id="studentId" disabled/>
+											</div>
+										</div>
+										
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-user"></i>姓名</span>
+												<input type="text" class="form-control" name="name" id="name"  disabled />
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-building"></i>院系</span>
+												<input type="text" class="form-control" name="department" id="department"  disabled/>
+											</div>
+										</div>
+									   	<div class="col-md-6 col-sm-6">	   	
+											<div class="input-group"><span class="input-group-addon"><i class="icon-reorder"></i>班级</span>
+												<input type="text" class="form-control" name="className" id="className" disabled/>
+											</div>		
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-calendar"></i>开始日期</span>
+												<input type="text" class="form-control" name="beginTime" id="beginTime"  disabled/>
+										</div>
+										</div>
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-calendar"></i>截止日期</span>
+												<input type="text" class="form-control" name="endTime" id="endTime" disabled/>
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-phone"></i>联系方式</span>
+												<input type="text" class="form-control" name="phone" id="phone" disabled/>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-6">
+											<div class="input-group"><span class="input-group-addon"><i class="icon-time"></i>请假节数</span>
+												<input type="text" class="form-control" name="number" id="leaveNumber" disabled/>
+											</div>
+										</div>
+									</div>
+
+									
+
+									<div class="form-group row">
+										<label for="Reason" class="form-control-label">请假理由</label>
+										<textarea class="form-control" rows="3" name="reason" id="reason" disabled></textarea>
+									</div>
+
+									<div class="form-group row">
+										<label for="File" class="form-control-label">请假证明</label>
+										<br>
+										<a  id="down" title="请单击下载" ><i class="icon-download"></i>下载请假证明</a>
+									</div>
+									
+									<label class="control-label bolder blue">请假状态</label>
+										
+									<div class="form-group row">
+
+										<div class="col-sm-6 col-md-6">
+											<div class="radio">
+												<label>
+														<input type="radio" class="ace" name="Qing" id="Qing1"  value="0" />
+														<span class="lbl">待审核</span>
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+														<input  type="radio" class="ace" name="Qing" id="Qing2"  value="-1"/>
+														<span class="lbl">拒绝请假</span>
+												</label>
+											</div>
+										</div>
+										
+										<div class="col-sm-6 col-md-6">
+											<div class="radio">
+												<label>
+														<input  type="radio" class="ace" name="Qing" id="Qing3"   value="1" />
+														<span class="lbl">同意请假</span>
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+														<input  type="radio" class="ace" name="Qing" id="Qing4" value="2" />
+														<span class="lbl">已销假</span>
+												</label>
+											</div>
+										</div>
+
+										<br>
+										
+									<div class="form-group row">
+											<div class="col-sm-12 col-md-12">
+												<label for="Reason" class="form-control-label">审批意见</label>
+												<textarea class="form-control" rows="3" name="comment" id="comment"></textarea>
+											</div>
+									</div>
+									
+									
+								</div>
+
+								<br><br>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon-remove"></i>关闭</button>
+									<button type="button" class="btn btn-primary" id="submitEdit">	<i class="icon-ok"></i> 提交</button>
+								</div>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+			<!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div>
+		
+		
+
+
+                <div class="row">
+		              <div class="footer" style="margin-bottom: 0px;">
+		                <center>   <div class="foot-text"> 广东海洋大学学生请假管理系统   </div> </center>
+		                <center> <div class="foot-copyright"> Copyright© 2019 GDOU Graduation-design Software </div> </center>
+		              </div>
+            	</div>
+		<!--
+        	描述：js导入，注意顺序，jquery必须引入
+        	bootstrap-table-zh-CN.js为表格汉化的文件
+        	FileSaver.min.js等是关联引用文件
+        -->
+		<script type="text/javascript" src="../../../static/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="../../../static/js/teacher/ace-extra.min.js"></script>
+		<script type="text/javascript" src="../../../static/js/teacher/bootstrap_above/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../../static/js/teacher/bootstrap_above/bootstrap-table-develop/dist/bootstrap-table.js"></script>
+		<script type="text/javascript" src="../../../static/js/teacher/bootstrap_above/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
+
+		<script type="text/javascript" src="../../../static/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../static/js/layer/extend/layer.ext.js"></script>
+
+         
+		<script type="text/javascript" src="../../../static/script/table.js"></script>
+		<script type="text/javascript" src="../../../static/js/teacher/ace-elements.min.js"></script>
+		<script type="text/javascript" src="../../../static/js/teacher/ace.min.js"></script>
+		    <section>
+    </div>
+    </div>
+	</body>
+</html>
